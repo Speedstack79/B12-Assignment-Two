@@ -15,13 +15,15 @@ using namespace std;
 
 int main(){
     vector<int> playerJerseys(0); 
-    vector<int> playerRatings(0);/*
+    vector<int> playerRatings(0);
+    /*
     for(int i = 0; i < playerJerseys.size(); ++i){
         playerJerseys[i] = i;
     }
     for(int i = 0; i <playerRatings.size(); ++i){
         playerRatings[i] = i;
-    }*/
+    }
+    */
     vector<int>* players[] = {&playerJerseys, &playerRatings};
     runInit(players);
     //runInit(playerJerseys, playerRatings);

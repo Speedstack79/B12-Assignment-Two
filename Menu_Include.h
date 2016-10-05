@@ -3,14 +3,12 @@
 #include "Methods_Include.h"
 using namespace std;
 
-/** 
-@param players takes a vector of struct player that will be passed to designated function(s)
-
-displays a list of options and will call designated function depending upon the
-character input given by user. Will print an "invalid" statement if input is not
-recognized and will print menu again. Entering 'q' or 'Q' will end function.
-
-*/
+/* DOC(displays a list of options and will call designated function 
+       depending upon the character input given by user. Will print 
+       an "invalid" statement if input is not recognized and will 
+       print menu again. Entering 'q' or 'Q' will end function.
+       @param playerJerseys
+       @param playerRatings )*/
 void runMenu(vector<int>& playerJerseys, vector<int>& playerRatings){
     char menuChoice;
     do{
@@ -50,12 +48,12 @@ void runMenu(vector<int>& playerJerseys, vector<int>& playerRatings){
     }while (menuChoice != 'q' && menuChoice != 'Q');
 }
 
-/** 
-@param players a vector of struct player that will be filled based on user input
-Prompts the user for the number of player structs to be added to players vector then
-prompts the user to enter a jersey number and rating. Gets a valid number for each and 
-assigns those values to player struct to be pushed onto the players vector.
-*/
+/* DOC(Prompts the user for the number of player structs to be added to 
+       players vector then prompts the user to enter a jersey number and 
+       rating. Gets a valid number for each and assigns those values to 
+       player struct to be pushed onto the players vector.
+       @param playerJerseys
+       @param playerRatings )*/
 void runInit(vector<int>& playerJerseys, vector<int>& playerRatings){
     cout << "How many players would you like to enter?\n";
     int initNumber;
@@ -71,6 +69,12 @@ void runInit(vector<int>& playerJerseys, vector<int>& playerRatings){
     runMenu(playerJerseys, playerRatings);
 }
 //Begin Single Parameter Implementation
+
+/* DOC(displays a list of options and will call designated function 
+       depending upon the character input given by user. Will print 
+       an "invalid" statement if input is not recognized and will 
+       print menu again. Entering 'q' or 'Q' will end function.
+       @param players )*/
 void runMenu(vector<int>* players[]){
     char menuChoice;
     do{
@@ -110,12 +114,11 @@ void runMenu(vector<int>* players[]){
     }while (menuChoice != 'q' && menuChoice != 'Q');
 }
 
-/** 
-@param players a vector of struct player that will be filled based on user input
-Prompts the user for the number of player structs to be added to players vector then
-prompts the user to enter a jersey number and rating. Gets a valid number for each and 
-assigns those values to player struct to be pushed onto the players vector.
-*/
+/* DOC(Prompts the user for the number of player structs to be added to 
+       players vector then prompts the user to enter a jersey number and 
+       rating. Gets a valid number for each and assigns those values to 
+       player struct to be pushed onto the players vector.
+       @param players )*/
 void runInit(vector<int>* players[]){
     cout << "How many players would you like to enter?\n";
     int initNumber;

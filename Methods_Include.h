@@ -2,7 +2,9 @@
 #include <iostream>
 using namespace std;
 
-
+/* DOC(Takes user input and checks to make surea valid input was provided
+       and within the valid range, 0-99 inclusive. 
+       Then returns the valid input) */
 int getValidJersey(){
     int retJersey = -1;
     cin >> retJersey;
@@ -11,8 +13,10 @@ int getValidJersey(){
         cin >> retJersey;
     }
     return retJersey;
-}
-
+} 
+/* DOC(Takes user input and checks to make sure valid input was provided
+       and within the valid range, 1-9 inclusive.
+       Then returns the valid input) */
 int getValidRating(){
     int retRating = -1;
     cin >> retRating;
@@ -22,7 +26,9 @@ int getValidRating(){
     }
     return retRating;
 }
-
+/* DOC(Prints out entire list of players
+       @param playerJerseys vector of player's Jersey numbers
+       @param playerRatings vector of player's ratings) */
 void outputRoster(vector<int>& playerJerseys, vector<int>& playerRatings){
     for(int i = 0; i < playerJerseys.size(); ++i){
         cout << "Player " << i + 1 
@@ -30,14 +36,19 @@ void outputRoster(vector<int>& playerJerseys, vector<int>& playerRatings){
             << ", Rating: " << playerRatings.at(i) << endl;
     }
 }
-
+/* DOC(Prompts the user for a jersey number and rating to be added
+       @param playerJerseys vector of player's Jersey numbers
+       @param playerRatings vector of player's ratings) */
 void addPlayer(vector<int>& playerJerseys, vector<int>& playerRatings){
     cout << "Enter a new player\'s jersey number: ";
     playerJerseys.push_back(getValidJersey());
     cout << "Enter a new player\'s rating: ";
     playerRatings.push_back(getValidRating());
 }
-
+/* DOC(prompts the user for a jersey number of the player to be
+       removed from the list of players
+       @param playerJerseys vector of player's Jersey numbers
+       @param playerRatings vector of player's ratings) */
 void removePlayer(vector<int>& playerJerseys, vector<int>& playerRatings){
     int tempJersey, indexAt;
     int isFound = 0;
@@ -68,7 +79,10 @@ void removePlayer(vector<int>& playerJerseys, vector<int>& playerRatings){
     playerJerseys.pop_back();
     playerRatings.pop_back();
 }
-
+/* DOC(Prompts the user for the jersey number and new rating for
+       a player to be assigned a new rating.
+       @param playerJerseys vector of player's Jersey numbers
+       @param playerRatings vector of player's ratings) */
 void updateRating(vector<int>& playerJerseys, vector<int>& playerRatings){
     int tempJersey, tempRating;
     
@@ -83,7 +97,10 @@ void updateRating(vector<int>& playerJerseys, vector<int>& playerRatings){
         }
     }
 }
-
+/* DOC(Prompts the user for a rating value then prints out the list
+       of players with a rating above the user input
+       @param playerJerseys vector of player's Jersey numbers
+       @param playerRatings vector of player's ratings) */
 void getAboveRating(vector<int>& playerJerseys, vector<int>& playerRatings){
     cout << "Enter a rating: ";
     int rating = getValidRating();
@@ -98,7 +115,14 @@ void getAboveRating(vector<int>& playerJerseys, vector<int>& playerRatings){
     }
     outputRoster(playerJerseysAbove, playerRatingsAbove);
 }
+
 //Begin Single Parameter Implementation
+
+
+/* DOC(prints out entire list of players with respective jersey
+       number and rating
+       @param players array of pointer to vectors of Jersey numbers
+                      and ratings) */
 void outputRoster(vector<int>* players[]){
     for(int i = 0; i < players[0]->size(); ++i){
         cout << "Player " << i + 1 
@@ -106,14 +130,20 @@ void outputRoster(vector<int>* players[]){
             << ", Rating: " << players[1]->at(i) << endl;
     }
 }
-
+/* DOC(Prompts the user for a jersey number and rating to be added
+       to the list of players
+       @param players array of pointer to vectors of Jersey numbers
+                      and ratings) */
 void addPlayer(vector<int>* players[]){
     cout << "Enter a new player\'s jersey number: ";
     players[0]->push_back(getValidJersey());
     cout << "Enter a new player\'s rating: ";
     players[1]->push_back(getValidRating());
 }
-
+/* DOC(prompts the user for a jersey number of the player to be
+       removed from the list of players
+       @param players array of pointer to vectors of Jersey numbers
+                      and ratings) */
 void removePlayer(vector<int>* players[]){
     int tempJersey, indexAt;
     int isFound = 0;
@@ -144,7 +174,10 @@ void removePlayer(vector<int>* players[]){
     players[0]->pop_back();
     players[1]->pop_back();
 }
-
+/* DOC(Prompts the user for the jersey number and new rating for
+       a player to be assigned a new rating.
+       @param players array of pointer to vectors of Jersey numbers
+                      and ratings) */
 void updateRating(vector<int>* players[]){
     int tempJersey, tempRating;
     
@@ -159,7 +192,10 @@ void updateRating(vector<int>* players[]){
         }
     }
 }
-
+/* DOC(Prompts the user for a rating value then prints out the list
+       of players with a rating above the user input
+       @param players array of pointer to vectors of Jersey numbers
+                      and ratings) */
 void getAboveRating(vector<int>* players[]){
     cout << "Enter a rating: ";
     int rating = getValidRating();
