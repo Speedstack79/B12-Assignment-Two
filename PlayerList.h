@@ -3,6 +3,7 @@
 #include <limits>
 using namespace std;
 
+/* DOC() */
 class PlayerList {
     public:
         PlayerList(void);
@@ -15,7 +16,6 @@ class PlayerList {
         void advAddPlayer(void);
         void advAddPlayer(int);
         void removePlayer(int);
-        void updatePlayer(int, int);
         void updatePlayer(void);
         void runMenu(void);
     
@@ -24,11 +24,12 @@ class PlayerList {
         vector<int> ratingValues;
     
 };
-
+/* DOC() */
 PlayerList::PlayerList(){
     vector<int> jerseyNumbers(0);
     vector<int> ratingValues(0);
 }
+/* DOC() */
 int PlayerList::getValidJersey(){
     int inInt;
     cin >> inInt;
@@ -40,6 +41,7 @@ int PlayerList::getValidJersey(){
     }
     return inInt;
 }
+/* DOC() */
 int PlayerList::getValidRating(){
     int inInt;
     cin >> inInt;
@@ -52,6 +54,7 @@ int PlayerList::getValidRating(){
     return inInt;
     
 }
+/* DOC() */
 int PlayerList::getMemberJersey(int fndJerseyNumber){
     int retIndex = -1;
     int i = 0;
@@ -64,6 +67,7 @@ int PlayerList::getMemberJersey(int fndJerseyNumber){
     
     return retIndex;
 }
+/* DOC() */
 void PlayerList::printAboveRating(int ratingAbove){
     int i = 0;
     cout << "  === Roster ===" << endl;
@@ -75,6 +79,7 @@ void PlayerList::printAboveRating(int ratingAbove){
         }
     }
 }
+/* DOC() */
 void PlayerList::printRoster(){
     int i = 0;
     cout << "  === Roster ===" << endl;
@@ -83,10 +88,12 @@ void PlayerList::printRoster(){
              << "\tRating: " << ratingValues.at(i) << endl;
     }
 }
+/* DOC() */
 void PlayerList::addPlayer(int newJerseyNumber, int newRatingValue){
     jerseyNumbers.push_back(newJerseyNumber);
     ratingValues.push_back(newRatingValue);
 }
+/* DOC() */
 void PlayerList::removePlayer(int delJerseyNumber){
     int index = getMemberJersey(delJerseyNumber);
     if(index> 0){
@@ -98,6 +105,7 @@ void PlayerList::removePlayer(int delJerseyNumber){
         cout << "No player had jersey number: "<< delJerseyNumber << "." << endl;
     
 }
+/* DOC() */
 void PlayerList::updatePlayer(){
     cout << "Enter Jersey number to be updated: ";
     
@@ -116,6 +124,7 @@ void PlayerList::updatePlayer(){
     
     
 }
+/* DOC() */
 void PlayerList::advAddPlayer(){
     cout << "How many players would you like add to your team? " << endl;
     int numInit = -1;
@@ -128,6 +137,7 @@ void PlayerList::advAddPlayer(){
     }
     advAddPlayer(numInit);
 }
+/* DOC() */
 void PlayerList::advAddPlayer(int numAddPlayers){
     
     for(int i = 0; i < numAddPlayers; ++i){
@@ -138,6 +148,7 @@ void PlayerList::advAddPlayer(int numAddPlayers){
         addPlayer(tmpJersey, tmpRating);
     }
 }
+/* DOC() */
 void PlayerList::runMenu(){
     advAddPlayer();
     printRoster();
@@ -155,8 +166,11 @@ void PlayerList::runMenu(){
             << "Choose an option:";
         
         cin >> inChoice;    
-        cin.clear();
+        //takes first character then clears until newline to prevent
+        //unexpected future menu choices
+        cin.clear(); 
         cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        
         switch(inChoice){
             case 'A':
             case 'a':
