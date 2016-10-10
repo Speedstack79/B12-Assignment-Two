@@ -6,7 +6,6 @@ using namespace std;
 class PlayerList {
     public:
         PlayerList(void);
-        PlayerList(vector<int>&, vector<int>&);
         int getValidJersey(void);
         int getValidRating(void);
         int getMemberJersey(int);
@@ -14,10 +13,11 @@ class PlayerList {
         void printRoster(void);
         void addPlayer(int, int);
         void advAddPlayer(void);
+        void advAddPlayer(int);
         void removePlayer(int);
         void updatePlayer(int, int);
+        void updatePlayer(void);
         void runMenu(void);
-        void TestFunctions(void);
     
     private:
         vector<int> jerseyNumbers;
@@ -28,10 +28,6 @@ class PlayerList {
 PlayerList::PlayerList(){
     vector<int> jerseyNumbers(0);
     vector<int> ratingValues(0);
-}
-PlayerList::PlayerList(vector<int>& initJerseyNumbers, vector<int>& initRatingValues){
-    vector<int> jerseyNumbers = initJerseyNumbers;
-    vector<int> ratingValues = initRatingValues;
 }
 int PlayerList::getValidJersey(){
     int inInt;
@@ -59,17 +55,25 @@ int PlayerList::getValidRating(){
 int PlayerList::getMemberJersey(int fndJerseyNumber){
     int retIndex = -1;
     int i = 0;
-    while(i < PlayerList::jerseyNumbers.size() && fndJerseyNumber != PlayerList::jerseyNumbers.at(i)){
+    while(i < jerseyNumbers.size() && fndJerseyNumber != PlayerList::jerseyNumbers.at(i)){
         ++i;
     }
-    if(i < PlayerList::jerseyNumbers.size()){
+    if(i < jerseyNumbers.size()){
         retIndex = i;
     }
     
     return retIndex;
 }
 void PlayerList::printAboveRating(int ratingAbove){
-    
+    int i = 0;
+    cout << "  === Roster ===" << endl;
+    for (i = 0; i < jerseyNumbers.size(); ++i){
+        if(ratingValues.at(i) > ratingAbove){
+            cout << "Player " << i + 1 << "\'s Jersey: " 
+                << jerseyNumbers.at(i) << "\tRating: " 
+                << ratingValues.at(i) << endl;
+        }
+    }
 }
 void PlayerList::printRoster(){
     int i = 0;
@@ -78,25 +82,38 @@ void PlayerList::printRoster(){
         cout << "Player " << i + 1 << "\'s Jersey: " << jerseyNumbers.at(i)
              << "\tRating: " << ratingValues.at(i) << endl;
     }
-    
 }
 void PlayerList::addPlayer(int newJerseyNumber, int newRatingValue){
     jerseyNumbers.push_back(newJerseyNumber);
     ratingValues.push_back(newRatingValue);
-    
 }
 void PlayerList::removePlayer(int delJerseyNumber){
     int index = getMemberJersey(delJerseyNumber);
     if(index> 0){
-        jerseyNumbers.erase(index);
-        ratingValues.erase(index);
+        jerseyNumbers.erase(jerseyNumbers.begin() + index);
+        ratingValues.erase(ratingValues.begin() + index);
         cout << "Player with jersey: " << delJerseyNumber << " removed."<< endl;
     }
     else
         cout << "No player had jersey number: "<< delJerseyNumber << "." << endl;
     
 }
-void PlayerList::updatePlayer(int jerseyNumber, int newRatingValue){
+void PlayerList::updatePlayer(){
+    cout << "Enter Jersey number to be updated: ";
+    
+    int inJersey = getValidJersey();
+    int index = getMemberJersey(inJersey);
+    while(index < 0){
+        printRoster();
+        cout << "Please enter a Jersey number on the team: ";
+        inJersey = getValidJersey();
+        index = getMemberJersey(inJersey);
+    }
+    cout << "Enter the new rating for " << inJersey << ": ";
+    int inRating = getValidRating();
+    
+    ratingValues.at(index) = inRating;
+    
     
 }
 void PlayerList::advAddPlayer(){
@@ -109,7 +126,11 @@ void PlayerList::advAddPlayer(){
         cout << "Please enter a valid and reasonable number (0-20): ";
         cin >> numInit;
     }
-    for(int i = 0; i < numInit; ++i){
+    advAddPlayer(numInit);
+}
+void PlayerList::advAddPlayer(int numAddPlayers){
+    
+    for(int i = 0; i < numAddPlayers; ++i){
         cout << "Enter Player " << i + 1 << "\'s Jersey Number: ";
         int tmpJersey = getValidJersey();
         cout << "Enter Player " << i + 1 << "\'s Rating: ";
@@ -120,16 +141,45 @@ void PlayerList::advAddPlayer(){
 void PlayerList::runMenu(){
     advAddPlayer();
     printRoster();
+    char inChoice;
+    do{
+        cout << endl 
+            << "    ====MENU====" << endl
+            << " a - Add player" << endl
+            << " m - Add multiple players" << endl
+            << " d - Remove player" << endl 
+            << " u - Update player rating" << endl
+            << " r - Output players above a rating" << endl 
+            << " o - Output roster" << endl
+            << " q - Quit" << endl
+            << "Choose an option:";
+        
+        cin >> inChoice;    
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        switch(inChoice){
+            case 'A':
+            case 'a':
+            advAddPlayer(1);break;
+            case 'd':
+            case 'D':
+            cout << "Enter a jersey number to remove: ";
+            removePlayer(getValidJersey()); break;
+            case 'u':
+            case 'U':
+            updatePlayer(); break;
+            case 'r':
+            case 'R':
+            cout << "Enter a rating value to see players above: ";
+            printAboveRating(getValidRating()); break;
+            case 'o':
+            case 'O':
+            printRoster(); break;
+            case 'm':
+            case 'M':
+            advAddPlayer(); break;
+        }
+
+    } while (inChoice != 'q' && inChoice != 'Q');
     
-    
-}
-void PlayerList::TestFunctions(){
-    /*
-    cout << "Enter Player Jersey Number: ";
-    int jerseyNumber = getValidJersey();
-    cout << "You entered: " << ((jerseyNumber < 10 ) ? "0": "") << jerseyNumber << endl;
-    cout << "Enter Player rating: ";
-    int rating = getValidRating();
-    cout << "You entered: " << rating << endl;
-    */
 }

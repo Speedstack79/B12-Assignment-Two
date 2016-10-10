@@ -9,25 +9,12 @@ Date Sub.:  2016/10/(Day Submitted)
 */
 
 #include <vector>
-#include "Menu_Include.h"
 #include "PlayerList.h"
 using namespace std;
 
 
 int main(){
-    //vector<int> playerJerseys(0); 
-    //vector<int> playerRatings(0);
     PlayerList myPlayers;
-    /*
-    for(int i = 0; i < playerJerseys.size(); ++i){
-        playerJerseys[i] = i;
-    }
-    for(int i = 0; i <playerRatings.size(); ++i){
-        playerRatings[i] = i;
-    }
-    */
-    //vector<int>* players[] = {&playerJerseys, &playerRatings};
     myPlayers.runMenu();
-    //runInit(playerJerseys, playerRatings);
     return 0;
 }
