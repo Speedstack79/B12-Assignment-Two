@@ -34,8 +34,10 @@ int PlayerList::getValidNumber(int min, int max, char option){
 }
 
 PlayerList::PlayerList(){
-    std::vector<int> jerseyNumbers(0);
-    std::vector<int> ratingValues(100, 0);
+    //std::vector<int> jerseyNumbers(0);
+    jerseyNumbers.reserve(0); //declared in .h, I THINK .reserve is the correct syntax to set space of vector
+    //std::vector<int> ratingValues(100, 0);
+    ratingValues.reserve(100);
 }
 
 int PlayerList::getMemberJersey(int jersey){
