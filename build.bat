@@ -1,2 +1,2 @@
 @echo off
-g++ AssignmentTwo.cpp -o AssignmentTwo.exe
+g++ -O0 -g AssignmentTwo.cpp PlayerList.cpp -o AssignmentTwo.exe
