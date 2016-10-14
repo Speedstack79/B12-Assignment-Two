@@ -40,7 +40,7 @@ PlayerList::PlayerList(){
 
 int PlayerList::getMemberJersey(int jersey){
     int index = -1;
-    for(int i = 0; i < jerseyNumbers.size() && jerseyNumbers.size() > 0; ++i){
+    for(int i = 0; i < jerseyNumbers.size(); ++i){
         if(jerseyNumbers.at(i) == jersey)
             index = i;
     }
